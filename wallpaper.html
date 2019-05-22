@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/prismjs@1.16.0/themes/prism-tomorrow.css"
+    />
+    <title>Wallpaper</title>
+    <style>
+      html,
+      body {
+        background-color: #2d2d2d;
+      }
+
+      .center {
+        /* border: 1px solid red; */
+        display: block;
+        width: fit-content;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <pre class="center"><code id="code" class="language-js"></code></pre>
+    <script src="https://unpkg.com/prismjs@1.16.0"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+    <script>
+      axios.get('code.js').then(res => {
+        const codeText = '\n' + res.data
+
+        const code = Prism.highlight(
+          codeText,
+          Prism.languages.javascript,
+          'javascript'
+        )
+
+        document.getElementById('code').innerHTML = code
+      })
+    </script>
+  </body>
+</html>
